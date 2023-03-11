@@ -9,7 +9,7 @@
         <header class="container-fluid" style="background-color:#337AB7;">
             <h5 class="text-center">
                 <em style="font-size:2rem;" class="pull-left glyphicon glyphicon-home"></em>
-                <span class="ttlo">在线考试系统</span>
+                <span class="ttlo">信息科技形成性评价系统</span>
                 <a style="font-size:2rem;color:#FFFFFF;" href="index.php?user-phone" class="pull-right glyphicon glyphicon-user ajax" data-target="user" data-page="user"></a>
             </h5>
         </header>

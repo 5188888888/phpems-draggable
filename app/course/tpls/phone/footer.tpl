@@ -3,7 +3,7 @@
         <div class="main itembox">
             <div class="col-xs-12">
                 <ul class="list-unstyled">
-                    <li class="text-center"><a href="">安检云在线考试系统 </a></li>
+                    <li class="text-center"><a href="">安检云信息科技形成性评价系统 </a></li>
                     <li class="text-center"><a href=""></a></li>
                 </ul>
             </div>

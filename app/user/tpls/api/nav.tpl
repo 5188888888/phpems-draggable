@@ -2,7 +2,7 @@
     <div class="row-fluid">
         <div class="main">
             <div class="col-xs-3">
-                <h1 style="font-size:42px;color:#337AB7;"><img src="app/core/styles/img/logo2.png" style="height:60px;margin-top:-10px;"/>&nbsp;<b>在线考试系统</b></h1>
+                <h1 style="font-size:42px;color:#337AB7;"><img src="app/core/styles/img/logo2.png" style="height:60px;margin-top:-10px;"/>&nbsp;<b>信息科技形成性评价系统</b></h1>
             </div>
             <div class="col-xs-1">
             </div>

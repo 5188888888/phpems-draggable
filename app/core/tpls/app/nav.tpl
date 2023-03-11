@@ -1,7 +1,7 @@
 <div class="topbar">
     <div class="topbar-box">
         <div class="col-xs-4">
-            <ul class="list-unstyled list-inline"><li class="menu">在线考试系统</li></ul>
+            <ul class="list-unstyled list-inline"><li class="menu">信息科技形成性评价系统</li></ul>
         </div>
         <div class="col-xs-8">
             <ul class="list-unstyled list-inline text-right">

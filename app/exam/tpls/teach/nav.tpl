@@ -4,7 +4,7 @@
             <div class="col-xs-12">
                 <ul class="list-unstyled list-inline">
                     <li>
-                        <span class="logo">在线考试系统教师管理</span>
+                        <span class="logo">信息科技形成性评价系统教师管理</span>
                     </li>
                     <li class="menu"><a href="index.php?course-teach">课程</a></li>
                     <li class="menu active"><a href="index.php?exam-teach">考试</a></li>
