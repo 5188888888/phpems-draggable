@@ -1,0 +1,35 @@
+<?php
+
+class action extends app
+{
+    public function display()
+    {
+        $action = $this->ev->url(3);
+        if (!method_exists($this, $action)) {
+            $action = 'index';
+        }
+        $this->$action();
+        exit;
+    }
+
+    private function index()
+    {
+        $this->course = $this->G->make('course', 'course');
+        $this->content = $this->G->make('content', 'content');
+        $this->position = $this->G->make('position', 'content');
+        $courses = $this->course->getCourseList([], 1, 10);
+        $basic = $this->G->make('basic', 'exam');
+        $basics = $basic->getBasicList([['AND', 'basicclosed = 0']], 1, 6);
+        $topimgs = $this->position->getPosNewsList([['AND', 'pcposid = 4']], 1, 5);
+        $topnews = $this->position->getPosNewsList([['AND', 'pcposid = 2']], 1, 10);
+        $links = $this->content->getContentList([['AND', 'contentcatid = 11']], 1, 10);
+        $notices = $this->content->getContentList([['AND', 'contentcatid = 14']], 1, 10);
+        $this->tpl->assign('notices', $notices);
+        $this->tpl->assign('links', $links);
+        $this->tpl->assign('courses', $courses);
+        $this->tpl->assign('basics', $basics);
+        $this->tpl->assign('topimgs', $topimgs);
+        $this->tpl->assign('topnews', $topnews);
+        $this->tpl->display('index');
+    }
+}
