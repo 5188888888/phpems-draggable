@@ -219,7 +219,7 @@
         data: treeData
     });
 </script>
-{x2;include:footer}
+
 </body>
 </html>
 {x2;endif}

@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            {x2;include:footer}
+            
         </div>
     </div>
 </div>

@@ -259,7 +259,7 @@
     </div>
 </div>
 {x2;include:code}
-{x2;include:footer}
+
 </body>
 </html>
 {x2;endif}

@@ -49,7 +49,7 @@
                 </div>
                 {x2;endif}
             </div>
-            {x2;include:footer}
+            
         </div>
         {x2;if:!$userhash}
     </div>

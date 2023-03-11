@@ -9,6 +9,7 @@
                         <div class="content-box padding">
                             <h2 class="title">我的考场<a href="index.php?exam-app-basics-open" class="badge pull-right">所有考场 <em class="glyphicon glyphicon-plus"></em> </a></h2>
                             <ul class="list-box list-unstyled">
+                                {x2;if:is_array($basics)}
                                 {x2;tree:$basics,basic,bid}
                                 <li class="col-xs-4 box">
                                     <a href="index.php?{x2;$_app}-app-index-setCurrentBasic&basicid={x2;v:basic['basicid']}" class="ajax">
@@ -26,6 +27,9 @@
                             <ul class="list-box list-unstyled">
                                 {x2;endif}
                                 {x2;endtree}
+                                {x2;else}
+                                <div class="content-box padding alert alert-warning" role="alert">暂无考场</div>
+                                {x2;endif}
                             </ul>
                         </div>
                     </div>
@@ -33,6 +37,7 @@
                         <div class="content-box padding">
                             <h2 class="title">最新考场 </h2>
                             <ul class="list-unstyled list-img">
+                                {x2;if:is_array($news)}
                                 {x2;tree:$news,basic,bid}
                                 <li class="border padding">
                                     <a href="index.php?{x2;$_app}-app-index-setCurrentBasic&basicid={x2;v:basic['basicid']}" class="ajax">
@@ -47,11 +52,14 @@
                                     </a>
                                 </li>
                                 {x2;endtree}
+                                {x2;else}
+                                <div class="content-box padding alert alert-warning" role="alert">暂无考场</div>
+                                {x2;endif}
                             </ul>
                         </div>
                     </div>
                 </div>
-                {x2;include:footer}
+                
             </div>
         </div>
     </div>

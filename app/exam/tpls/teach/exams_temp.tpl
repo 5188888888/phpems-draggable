@@ -150,7 +150,7 @@ function loadsubjectsetting(obj)
     $.getJSON('index.php?exam-teach-basic-getsubjectquestype&subjectid='+$(obj).val()+'&'+Math.random(),function(data){$('.questpanel').hide();for(x in data){$('.panel_'+data[x]).show();}});
 }
 </script>
-{x2;include:footer}
+
 </body>
 </html>
 {x2;endif}

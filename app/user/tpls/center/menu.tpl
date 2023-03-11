@@ -10,11 +10,6 @@
             <span class="glyphicon glyphicon-stats"></span> 学习进度
         </a>
     </li>
-    <li  class="border{x2;if:$method == 'payfor'} active{x2;endif}">
-        <a href="index.php?user-center-payfor">
-            <span class="glyphicon glyphicon-yen"></span> 积分充值
-        </a>
-    </li>
     <li  class="border{x2;if:$method == 'privatement'} active{x2;endif}">
         <a href="index.php?user-center-privatement">
             <span class="glyphicon glyphicon-cog"></span> 个人设置

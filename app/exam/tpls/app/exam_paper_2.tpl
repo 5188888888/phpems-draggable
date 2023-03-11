@@ -361,7 +361,7 @@ $(document).ready(function(){
 });
 </script>
 <!--
-{x2;include:footer}
+
 -->
 </body>
 </html>

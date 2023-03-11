@@ -248,7 +248,7 @@ function confirmRules()
     $('#modal').modal('hide');
 }
 </script>
-{x2;include:footer}
+
 </body>
 </html>
 {x2;endif}

@@ -240,7 +240,7 @@
                     {x2;endtree}
                 </div>
             </div>
-            {x2;include:footer}
+            
         </div>
     </div>
 </div>

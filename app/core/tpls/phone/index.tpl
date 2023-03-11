@@ -245,14 +245,6 @@
                         </a>
                     </li>
                     <li class="unstyled">
-                        <a href="index.php?user-phone-payfor" class="ajax">
-                            <div class="rows info">
-                                积分充值
-                                <span class="pull-right"><em class="iconfont icon-right iconmenu"></em></span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="unstyled">
                         <a href="index.php?user-phone-privatement-modifypass" class="ajax">
                             <div class="rows info">
                                 修改密码

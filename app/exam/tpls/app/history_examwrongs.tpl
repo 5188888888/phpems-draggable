@@ -278,7 +278,7 @@
                 </div>
             </div>
             {x2;endif}
-            {x2;include:footer}
+            
         </div>
     </div>
 </div>

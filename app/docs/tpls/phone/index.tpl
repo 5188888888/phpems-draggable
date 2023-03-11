@@ -134,7 +134,7 @@
                 });
             });
         </script>
-        {x2;include:footer}
+        
 {x2;if:!$userhash}
     </div>
 </div>

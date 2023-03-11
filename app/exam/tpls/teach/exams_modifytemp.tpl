@@ -152,7 +152,7 @@
 <script>
 $.getJSON('index.php?exam-teach-basic-getsubjectquestype&subjectid={x2;$exam['examsubject']}&'+Math.random(),function(data){$('.questpanel').hide();$('.questypepanelinput').val('0');for(x in data){$('.panel_'+data[x]).show();$('#panel_'+data[x]).val('1');}});
 </script>
-{x2;include:footer}
+
 </body>
 </html>
 {x2;endif}

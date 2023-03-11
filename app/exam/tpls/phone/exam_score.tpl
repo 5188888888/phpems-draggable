@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            {x2;include:footer}
+            
         </div>
         {x2;if:!$userhash}
     </div>

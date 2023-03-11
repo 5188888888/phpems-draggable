@@ -123,6 +123,6 @@
         </div>
     </div>
 </div>
-{x2;include:footer}
+
 </body>
 </html>
