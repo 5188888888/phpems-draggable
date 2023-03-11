@@ -748,6 +748,9 @@ class action extends app
         } else {
             $subjects = $this->basic->getSubjectList();
             $questypes = $this->basic->getQuestypeList();
+            if(!is_array($exam['examquestions'])) {
+                $exam['examquestions'] = [];
+            }
             foreach ($exam['examquestions'] as $key => $p) {
                 $exam['examnumber'][$key] = $this->exam->getExamQuestionNumber($p);
             }

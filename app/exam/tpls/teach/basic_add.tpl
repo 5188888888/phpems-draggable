@@ -113,13 +113,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="basicprice" class="control-label col-sm-2">价格设置</label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" rows="4" name="args[basicprice]" id="basicprice">{x2;$basic['basicprice']}</textarea>
-                                  <span class="help-block">请按照“时长:开通所需积分”格式填写，每行一个，时长以天为单位，免费考场此设置无效。</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="basic" class="control-label col-sm-2"></label>
                             <div class="col-sm-9">
                                 <button class="btn btn-primary" type="submit">提交</button>

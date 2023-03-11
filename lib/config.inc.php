@@ -1,7 +1,7 @@
 <?php
 
 /* 常规常量设置 */
-define('DEBUG', true); //开启日志和错误调试
+define('DEBUG', false); //开启日志和错误调试
 define('DOMAINTYPE', 'off');
 define('CH', 'exam_');
 define('CDO', '');
