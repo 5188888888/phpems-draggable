@@ -17,6 +17,9 @@
                 </div>
             </li>
             {x2;endif}
+            {x2;if:$questype['questid'] == 7}
+            {x2;include:draggableQuestionExercise}
+            {x2;else}
             <li class="border morepadding">
                 <div class="desc">
                     <p>{x2;realhtml:$question['question']}</p>
@@ -68,6 +71,7 @@
                     {x2;endif}
                 </form>
             </li>
+            {x2;endif}
             {x2;endif}
             <li class="border morepadding rightanswer hide">
                 <div class="intro">

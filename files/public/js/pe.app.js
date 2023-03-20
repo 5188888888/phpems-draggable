@@ -122,7 +122,7 @@ function setAnswerHtml(t,o)
 {
 	$("."+o).hide();
 	$("#"+o+"_"+t).show();
-	if(parseInt(t) == 0 || parseInt(t) == 5)
+	if(parseInt(t) == 0 || parseInt(t) == 5 || parseInt(t) == 7)
 	{
 		$("#selectnumber").hide();
 		$("#selecttext").hide();

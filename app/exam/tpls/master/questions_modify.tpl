@@ -73,14 +73,14 @@
                                   <span class="help-block">需要填空处请以()表示。</span>
                             </div>
                         </div>
-                        <div class="form-group" id="selecttext"{x2;if:$questypes[$question['questiontype']]['questsort'] || $questypes[$question['questiontype']]['questchoice'] == 5} style="display:none;"{x2;endif}>
+                        <div class="form-group" id="selecttext"{x2;if:$questypes[$question['questiontype']]['questchoice'] == 7 || $questypes[$question['questiontype']]['questsort'] || $questypes[$question['questiontype']]['questchoice'] == 5} style="display:none;"{x2;endif}>
                             <label class="control-label col-sm-2">备选项：</label>
                               <div class="col-sm-10">
                                   <textarea class="ckeditor" name="args[questionselect]" id="questionselect">{x2;realhtml:$question['questionselect']}</textarea>
                                   <span class="help-block">无选择项的请不要填写，如填空题、问答题等主观题。</span>
                             </div>
                         </div>
-                        <div class="form-group" id="selectnumber"{x2;if:$questypes[$question['questiontype']]['questsort'] || $questypes[$question['questiontype']]['questchoice'] == 5} style="display:none;"{x2;endif}>
+                        <div class="form-group" id="selectnumber"{x2;if:$questypes[$question['questiontype']]['questchoice'] == 7 || $questypes[$question['questiontype']]['questsort'] || $questypes[$question['questiontype']]['questchoice'] == 5} style="display:none;"{x2;endif}>
                             <label for="questionselectnumber" class="control-label col-sm-2">备选项数量：</label>
                               <div class="col-sm-3">
                                   <select class="form-control" name="args[questionselectnumber]" id="questionselectnumber">
@@ -134,6 +134,9 @@
                                 </div>
                                 <div id="answerbox_5" class="answerbox"{x2;if:$questypes[$question['questiontype']]['questchoice'] != 5} style="display:none;"{x2;endif}>
                                       <input type="text" name="targs[questionanswer5]" value="{x2;realhtml:$question['questionanswer']}" />
+                                </div>
+                                <div id="answerbox_7" class="answerbox"{x2;if:$questypes[$question['questiontype']]['questchoice'] != 7} style="display:none;"{x2;endif}>
+                                      {x2;include:draggableQuestion}
                                 </div>
                                 <div id="answerbox_0"{x2;if:!$questypes[$question['questiontype']]['questsort']} style="display:none;"{x2;endif} class="answerbox">
                                       <textarea cols="72" rows="7" class="ckeditor" id="questionanswer0" name="targs[questionanswer0]">{x2;realhtml:$question['questionanswer']}</textarea>

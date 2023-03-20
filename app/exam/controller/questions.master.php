@@ -21,6 +21,43 @@ class action extends app
         exit;
     }
 
+    private function draggableQuestion()
+    {
+        $data = $_POST['data'] ?? null;
+        $type = strtolower($_POST['type'] ?? '');
+        $questionid = $this->ev->get('questionid');
+        if (!is_null($data) && strtolower($_SERVER['REQUEST_METHOD']) === 'post') {
+            $args['questionanswer'] = $data;
+            switch($type) {
+                case 'modify':
+                    $this->exam->modifyQuestions($questionid, $args);
+                    echo 'ok';
+                break;
+                
+                case 'verify':
+                    $question = $this->exam->getQuestionByArgs([['AND', 'questionid = :questionid', 'questionid', $questionid]]);
+                    $answer  = json_decode($question['questionanswer'] ?? '', true);
+                    if($answer !== null) {
+                        $answer = $answer['to'];
+                        $verified = [];
+                        $correct = null;
+                        foreach($data as $item) {
+                            $id = $item['id'];
+                            $verified[$id] = ($item['value'] === $answer[$id]['value']);
+                            $correct = ($correct === null) ? $verified[$id] : ($correct && $verified[$id]);
+                        }
+                        $result = ['message' => $verified, 'correct' => ($correct ? 'success' : 'wrong'), 'status' => true];
+                    } else {
+                        $result = ['message' => '数据为空, 无法校验', 'status' => false];
+                    }
+                    echo json_encode($result);
+                break;
+            }
+        } else {
+            echo '非法请求';
+        }
+    }
+
     private function makequery()
     {
         $message = [
@@ -194,9 +231,11 @@ class action extends app
             } else {
                 $choice = $questype['questchoice'];
             }
-            $args['questionanswer'] = $targs['questionanswer'.$choice];
-            if (is_array($args['questionanswer'])) {
-                $args['questionanswer'] = implode('', $args['questionanswer']);
+            if($questype['questchoice'] !== '7') {
+                $args['questionanswer'] = $targs['questionanswer'.$choice];
+                if (is_array($args['questionanswer'])) {
+                    $args['questionanswer'] = implode('', $args['questionanswer']);
+                }
             }
             $this->exam->modifyQuestions($questionid, $args);
             if ($args['questionparent']) {

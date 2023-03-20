@@ -21,4 +21,12 @@
     -->
     <script src="files/public/js/pe.app.js"></script>
     <script src="files/public/js/exam.app.js"></script>
+    <!--拖放题需要的组件-[START]-->
+    <link rel="stylesheet" href="files/public/css/dragObject.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://www.itxst.com/package/sortable/Sortable.min.js"></script>
+    <script src="https://www.itxst.com/package/vuedraggablenext/vuedraggable.umd.min.js"></script>
+    <script src="files/public/js/dragObject.js"></script>
+    <!--拖放题需要的组件-[END]-->
 </head>

@@ -189,6 +189,9 @@
                                 <div id="answerbox_5" class="answerbox" style="display:none;">
                                       <input type="text" name="targs[questionanswer5]" value="" />
                                 </div>
+                                <div id="answerbox_7" class="answerbox" style="display:none;">
+                                      {x2;include:addDraggableQuestion}
+                                </div>
                                 <div id="answerbox_0" style="display:none;" class="answerbox">
                                       <textarea cols="72" rows="7" class="ckeditor" id="questionanswer0" name="targs[questionanswer0]">{x2;$question['questionanswer']}</textarea>
                                 </div>

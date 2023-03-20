@@ -1,0 +1,70 @@
+.text-area ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 0;
+    padding: 10px;
+    text-decoration: none;
+    list-style-type: none;
+    border: 2px solid #eee;
+    border-radius: 5px;
+}
+
+.text-area ul li {
+    margin-top: 10px;
+}
+
+.list,
+.drag-area {
+    display: flex;
+}
+
+.list span {
+    width: 200px;
+    margin-right: 10px;
+}
+
+.gap {
+    width: 100px;
+    text-align: center;
+}
+
+.gap,
+.drag-area .item,
+.target,
+.chosenClass {
+    padding: 2px 5px;
+    border-radius: 5px;
+    background-color: #eee;
+}
+
+.drag-area .item {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.drag-area .item:hover {
+    background-color: #5d5d5d;
+    color: #fff;
+}
+
+.ghost {
+    border: solid 1px rgb(19, 41, 239);
+}
+
+.target,
+.chosenClass {
+    display: inline-block;
+    background-color: #5d5d5d !important;
+    color: #fff;
+}
+
+.chosenClass {
+    display: none;
+}
+
+.submit-area {
+    display: flex;
+    float: right;
+    gap: 10px;
+    margin-top: 20px;
+}
