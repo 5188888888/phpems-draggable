@@ -18,6 +18,9 @@
                 </div>
             </li>
             {x2;endif}
+            {x2;if:$questype['questid'] == 7}
+            {x2;include:draggableQuestionExercise}
+            {x2;else}
             <li class="unstyled">
                 <div class="rows">
                     <p>{x2;realhtml:$question['question']}</p>
@@ -64,6 +67,7 @@
             <li class="unstyled text-center">
                 <button class="primary badge finish" rel="{x2;$question['questionid']}">答题完毕</button>
             </li>
+            {x2;endif}
             {x2;endif}
             {x2;endif}
             <li class="unstyled rightanswer hide">

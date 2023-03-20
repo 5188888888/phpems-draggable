@@ -2,6 +2,73 @@
 const { createApp, reactive } = Vue
 const { vuedraggable } = Sortable
 
+const global = {
+  basicQueryUrl: '?exam-app-customQueryApiByJ-query',
+  questionQueryUrl: '?exam-app-customQueryApiByJ-query&questionid=',
+  isMobile: (document.body.clientWidth <= 500),
+  highlight(id, backgroundColor = '#eee', color = 'black') {
+    document.getElementById(id).style.backgroundColor = backgroundColor;
+    document.getElementById(id).style.color = color;
+  },
+  GetUrlRelativePath() {
+    let url = document.location.toString();
+    let arrUrl = url.split('//');
+
+    let start = arrUrl[1].indexOf('/');
+    let relUrl = arrUrl[1].substring(start); //stop省略, 截取从start开始到结尾的所有字符
+
+    if (relUrl.indexOf('?') != -1) {
+      relUrl = relUrl.split('?')[0];
+    }
+    return relUrl;
+  },
+  getRandomArr(arr, num) {
+    let _arr = arr.concat();
+    let n = _arr.length;
+    let result = [];
+
+    // 先打乱数组
+    while (n-- && num--) {
+      let index = Math.floor(Math.random() * n); // 随机位置
+      [_arr[index], _arr[n]] = [_arr[n], _arr[index]]; // 交换数据
+      result.push(_arr[n]); // 取出当前最后的值，即刚才交换过来的值
+    }
+    return result;
+  },
+  show(obj) {
+    if ((typeof obj !== 'object') || !Object.hasOwn(obj, 'title')) {
+      alert('参数不完整! 至少需要 [title] !');
+      return false;
+    }
+    if (!global.isMobile) {
+      Swal.fire({
+        title: obj.title,
+        text: obj.text ?? '',
+        icon: obj.icon ?? 'warning'
+      })
+    } else {
+      alert(obj.title + "\n" + (obj.text ?? ''));
+    }
+  },
+  submit(url, objData, callback) {
+    let result;
+    $.ajax({
+      type: 'POST',
+      url: global.GetUrlRelativePath() + url,
+      async: false,
+      data: objData,
+      success: (data) => { result = callback(data) }
+    });
+    return result;
+  },
+  getQuestion(id) {
+    return global.submit(global.questionQueryUrl + id, { data: 'null', type: 'onlyQuestion' }, (data) => {
+      data = JSON.parse(data);
+      return (data.message === 'success') ? data.question : {};
+    });
+  }
+};
+
 // 拖动组件
 const dragObject = {
   state: false,
@@ -140,18 +207,21 @@ const dmethods = {
   checkAnswer(questionId) {
     let answer = '<br/>';
     let checked = false;
+    let tmp = { title: '', icon: '' };
+
     dragObject.data.to.forEach((option) => {
       if ((option.value === undefined) || (option.value === null)) {
-        Swal.fire(
-          '未完成做题',
-          '请检查题目是否还有未完成的选项!',
-          'error'
-        );
+        tmp.title = '未完成做题!';
+        tmp.text = '请检查题目是否还有未完成的选项!';
+        tmp.icon = 'error';
+        global.show(tmp)
         checked = false;
-        return;
       } else {
         answer += option.description + ': ' + option.value + '<br/>';
         checked = true;
+      }
+      if (!checked) {
+        return false;
       }
     });
 
@@ -160,78 +230,62 @@ const dmethods = {
       return;
     }
 
-    Swal.fire({
-      title: '确定要提交吗?',
-      text: "提交做题后不可更改!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '确定',
-      cancelButtonText: '取消'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        $.post(dmethods.GetUrlRelativePath() + '?exam-master-questions-draggableQuestion&questionid=' + questionId, { data: dragObject.data.to, type: 'verify' }, (data) => {
-          data = JSON.parse(data);
-          data.message.forEach((v, k) => {
-              dmethods.highleight(k, !v ? 'red' : 'green', 'white');
-          });
-          switch (data.correct) {
-            case 'wrong':
-              Swal.fire({
-                title: '答案有误! 请仔细检查!',
-                icon: 'error'
-              })
+    let confirmSubmit = () => {
+      tmp.text = '';
+      global.submit(global.questionQueryUrl + questionId, { data: dragObject.data.to, type: 'verify' }, (data) => {
+        data = JSON.parse(data);
+        data.message.forEach((v, k) => {
+          global.highlight(k, !v ? 'red' : 'green', 'white');
+        });
+        let toAlert = false;
+        switch (data.correct) {
+          case 'wrong':
+            tmp.title = '答案有误! 请仔细检查!';
+            tmp.icon = 'error';
+            toAlert = true;
             break;
 
-            case 'success':
-              Swal.fire({
-                title: '恭喜, 回答正确!',
-                icon: 'success'
-              })
+          case 'success':
+            tmp.title = '恭喜, 回答正确!';
+            tmp.icon = 'success';
+            toAlert = true;
             break;
 
-            default:
-              Swal.fire({
-                title: '[Dx0002] 未知错误! 请联系站点管理员检查该问题.',
-                icon: 'success'
-              })
+          default:
+            tmp.title = '[Dx0002] 未知错误! 请联系站点管理员检查该问题.';
+            tmp.icon = 'error';
+            toAlert = true;
             break;
-          }
-        })
+        }
+
+        if (toAlert) {
+          global.show(tmp)
+          return;
+        }
+      });
+    };
+
+    tmp.title = '确定要提交吗?';
+    tmp.text = '提交做题后不可更改!';
+    if (!global.isMobile) {
+      Swal.fire({
+        title: tmp.title,
+        text: tmp.text,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          confirmSubmit();
+        }
+      });
+    } else {
+      if (confirm(tmp.title + "\n" + tmp.text)) {
+        confirmSubmit();
       }
-    });
-  },
-
-  highleight(id, backgroundColor = '#eee', color = 'black') {
-    document.getElementById(id).style.backgroundColor = backgroundColor;
-    document.getElementById(id).style.color = color;
-  },
-
-  GetUrlRelativePath() {
-    let url = document.location.toString();
-    let arrUrl = url.split("//");
-
-    let start = arrUrl[1].indexOf("/");
-    let relUrl = arrUrl[1].substring(start); //stop省略, 截取从start开始到结尾的所有字符
-
-    if (relUrl.indexOf("?") != -1) {
-      relUrl = relUrl.split("?")[0];
     }
-    return relUrl;
-  },
-
-  getRandomArr(arr, num) {
-    let _arr = arr.concat();
-    let n = _arr.length;
-    let result = [];
-
-    // 先打乱数组
-    while (n-- && num--) {
-      let index = Math.floor(Math.random() * n); // 随机位置
-      [_arr[index], _arr[n]] = [_arr[n], _arr[index]]; // 交换数据
-      result.push(_arr[n]); // 取出当前最后的值，即刚才交换过来的值
-    }
-    return result;
   }
 }
