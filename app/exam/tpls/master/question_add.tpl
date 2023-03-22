@@ -190,7 +190,7 @@
                                       <input type="text" name="targs[questionanswer5]" value="" />
                                 </div>
                                 <div id="answerbox_7" class="answerbox" style="display:none;">
-                                      {x2;include:addDraggableQuestion}
+                                      由于根系统的实现原因, 需要先保存本题目, 再进行修改拖放题, 方可新增或删除选项.
                                 </div>
                                 <div id="answerbox_0" style="display:none;" class="answerbox">
                                       <textarea cols="72" rows="7" class="ckeditor" id="questionanswer0" name="targs[questionanswer0]">{x2;$question['questionanswer']}</textarea>

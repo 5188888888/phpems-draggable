@@ -101,14 +101,49 @@
                             <li class="border morepadding">
                                 <div class="desc">
                                     <!--生成拖放题区域-[START]-->
-                                    <script type="application/javascript">currentId = '{x2;v:question[questionid]}';</script>
-                                    {x2;include:draggableQuestionExam}
+                                    <script type="application/javascript">
+                                    examMode = true;
+                                    currentId = '{x2;v:question[questionid]}';
+                                    global = new Global;
+                                    question = '{x2;$sessionvars[examsessionuseranswer][v:question[questionid]]}';
+                                    question = question.length > 0 ? JSON.parse('{x2;$sessionvars[examsessionuseranswer][v:question[questionid]]}') : {};
+                                    question = global.ajaxGetQuestion(currentId);
+                                    question = (Object.keys(question).length > 0) ? question : {
+                                      from: [],
+                                      to: []
+                                    };
+                                    // 打乱顺序
+                                    question.from = global.getRandomArr(question.from, Object.keys(question.from).length);
+                                    // 更新数据
+                                    examObjList[{x2;v:question[questionid]}] = new DragObject;
+                                    examObjList[{x2;v:question[questionid]}].data = reactive(question);
+                                    eM = new EventManager(examObjList[{x2;v:question[questionid]}]);
+                                    questionManager = new QuestionManager(examObjList[{x2;v:question[questionid]}], currentId);
+                                    
+                                    
+                                    createApp({
+                                      components: {
+                                        'draggable': window.vuedraggable,
+                                        'eM': eM,
+                                        'question': question
+                                      },
+                                      data() {
+                                        return {
+                                          data: examObjList[{x2;v:question[questionid]}].data,
+                                          eM: eM,
+                                          question: questionManager
+                                        }
+                                      },
+                                      methods: {
+                                      }
+                                    }).mount('#app' + currentId)
+                                    </script>
                                     <div id="app{x2;v:question[questionid]}">
                                       <div class="card">
                                           <div class="card-body">
                                               <div class="text-area">
                                                   <ul>
-                                                      <draggable :list="data.to" animation="300" item-key="id" group="dataType" :sort="false" filter=".list" @change="onChange">
+                                                      <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
                                                           <template #item="{ element }">
                                                               <li class="list">
                                                                   <span>{{ element.description }}</span>
@@ -119,7 +154,7 @@
                                                   </ul>
                                               </div>
                                               <draggable class="drag-area" :list="data.from" animation="300" item-key="id"
-                                                  :group="{ name: 'dataType', pull: 'clone', put: false }" @start="onStart" @move="onMove" @end="onEnd"
+                                                  :group="{ name: 'dataType{x2;v:question[questionid]}', pull: 'clone', put: false }" @start="eM.onStart($event)" @move="eM.onMove($event)" @end="eM.onEnd($event, {x2;v:question[questionid]})"
                                                   :sort="false" ghost-class="ghost" chosen-class="chosenClass">
                                                   <template #item="{ element }">
                                                       <div class="item">{{ element.name }}</div>

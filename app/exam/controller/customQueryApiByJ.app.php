@@ -19,15 +19,16 @@ class action extends app
 
     private function query()
     {
-        $data = $_POST['data'] ?? null;
-        $type = strtolower($_POST['type'] ?? '');
+        $data = !empty($_POST) ? $_POST : file_get_contents('php://input');
+        $data = is_string($data) ? json_decode($data, true) : $data;
         $questionid = $this->ev->get('questionid');
-        if (!is_null($data) && (strtolower($_SERVER['REQUEST_METHOD']) === 'post')) {
-            $args['questionanswer'] = $data;
+        if (strtolower($_SERVER['REQUEST_METHOD']) === 'post') {
+            $type = strtolower($data['type'] ?? '');
             switch ($type) {
                 case 'modify':
+                    $args['questionanswer'] = $data['data'];
                     $this->exam->modifyQuestions($questionid, $args);
-                    echo 'ok';
+                    $result = ['message' => 'success', 'status' => true];
                 break;
 
                 case 'verify':
@@ -50,7 +51,7 @@ class action extends app
                             $answer = $answer['to'];
                             $verified = [];
                             $correct = null;
-                            foreach ($data as $item) {
+                            foreach ($data['data'] as $item) {
                                 $id = $item['id'];
                                 $verified[$id] = ($item['value'] === $answer[$id]['value']);
                                 $correct = ($correct === null) ? $verified[$id] : ($correct && $verified[$id]);
@@ -60,15 +61,9 @@ class action extends app
                             $result = ['message' => '数据为空, 无法校验', 'status' => false];
                         }
                     }
-                    echo json_encode($result ?? ['message' => '无效的问题ID', 'status' => false], JSON_UNESCAPED_UNICODE);
-                break;
-                
-                default:
-                    echo 'Error';
                 break;
             }
-        } else {
-            echo '非法请求';
         }
+        echo json_encode($result ?? ['message' => '非法请求', 'status' => false], JSON_UNESCAPED_UNICODE);
     }
 }
