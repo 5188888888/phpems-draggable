@@ -9,8 +9,8 @@ const examObjList = {};
  */
 class Global {
   constructor() {
-    this.basicQueryUrl = '?exam-app-customQueryApiByJ-query';
-    this.questionQueryUrl = `${this.basicQueryUrl}&questionid=`;
+    this.basicQueryUrl = '?exam-app-customQueryApiByJ-';
+    this.questionQueryUrl = `${this.basicQueryUrl}query&questionid=`;
     this.isMobile = document.body.clientWidth <= 500;
   }
 
@@ -249,6 +249,15 @@ class EventManager {
       let input = document.getElementById(`draggableQuestion${id}`);
       let data = examObjList[id].data.to;
       input.value = JSON.stringify(data);
+      // 写入本地存储
+      let q = localStorage.getItem('questions')
+      q = JSON.parse(q)
+      q[id] = { value: input.value, time: Math.floor((new Date).getTime() / 1000) };
+      localStorage.setItem('questions', JSON.stringify(q))
+      // 发送数据缓存
+      this.global.ajaxSubmit(`${this.global.basicQueryUrl}session&questionid=${this.questionId}`, { data: input.value }, (response) => {
+        console.log(response)
+      });
     }
   }
 }

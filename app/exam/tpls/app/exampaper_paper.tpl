@@ -105,20 +105,20 @@
                                     examMode = true;
                                     currentId = '{x2;v:question[questionid]}';
                                     global = new Global;
-                                    question = '{x2;$sessionvars[examsessionuseranswer][v:question[questionid]]}';
-                                    question = question.length > 0 ? JSON.parse('{x2;$sessionvars[examsessionuseranswer][v:question[questionid]]}') : {};
+                                    questionCache = localStorage.getItem('questions');
+                                    questionCache = ((questionCache !== null) && (questionCache.length > 0)) ? (JSON.parse(questionCache)[currentId]?.value || []) : [];
                                     question = global.ajaxGetQuestion(currentId);
-                                    question = (Object.keys(question).length > 0) ? question : {
-                                      from: [],
-                                      to: []
-                                    };
+                                    if  (Object.keys(question).length > 0) {
+                                        question.to = JSON.parse(questionCache);
+                                    }
+                                    question = question || { from: [], to: [] };
                                     // 打乱顺序
                                     question.from = global.getRandomArr(question.from, Object.keys(question.from).length);
                                     // 更新数据
-                                    examObjList[{x2;v:question[questionid]}] = new DragObject;
-                                    examObjList[{x2;v:question[questionid]}].data = reactive(question);
-                                    eM = new EventManager(examObjList[{x2;v:question[questionid]}]);
-                                    questionManager = new QuestionManager(examObjList[{x2;v:question[questionid]}], currentId);
+                                    examObjList[currentId] = new DragObject;
+                                    examObjList[currentId].data = reactive(question);
+                                    eM = new EventManager(examObjList[currentId]);
+                                    questionManager = new QuestionManager(examObjList[currentId], currentId);
                                     
                                     
                                     createApp({
@@ -129,7 +129,7 @@
                                       },
                                       data() {
                                         return {
-                                          data: examObjList[{x2;v:question[questionid]}].data,
+                                          data: examObjList[currentId].data,
                                           eM: eM,
                                           question: questionManager
                                         }

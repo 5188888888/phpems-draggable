@@ -66,4 +66,29 @@ class action extends app
         }
         echo json_encode($result ?? ['message' => '非法请求', 'status' => false], JSON_UNESCAPED_UNICODE);
     }
+
+    private function session()
+    {
+        $session = $this->exam->getExamSessionBySessionid();
+        if ($session) {
+            $data       = !empty($_POST) ? $_POST : file_get_contents('php://input');
+            $data       = is_string($data) ? json_decode($data, true) : $data;
+            $questionid = $this->ev->get('questionid');
+
+            if (strtolower($_SERVER['REQUEST_METHOD']) === 'post') {
+                $questions = $session['examsessionquestion'];
+                $answers = $session['examsessionuseranswer'] ?? false;
+                // var_dump('<pre>', $questions);
+                if($answers) {
+                    // var_dump($answers);
+                    // var_dump($questions[$questionid]);
+                    $answers[$questionid] = $data;
+                    $args['examsessionuseranswer'] = $answers;
+                    $this->exam->modifyExamSession($args);
+                    $result = ['message' => 'ok', 'status' => true];
+                }
+            }
+        }
+        echo json_encode($result ?? ['message' => '非法请求', 'status' => false], JSON_UNESCAPED_UNICODE);
+    }
 }
