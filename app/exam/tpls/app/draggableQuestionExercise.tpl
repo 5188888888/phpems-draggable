@@ -56,7 +56,7 @@
           </template>
         </draggable>
         <div class="submit-area">
-            <button class="btn btn-primary badge" @click="questionManager.checkAnswer({x2;$question[questionid]})">答题完毕</button>
+            <button class="btn btn-primary badge" @click="questionManager.checkAnswer()">答题完毕</button>
         </div>
         <input type="hidden" id="formData" name="targs[questionanswer7]" />
       </div>

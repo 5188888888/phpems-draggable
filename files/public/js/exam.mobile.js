@@ -40,6 +40,14 @@ function markQuestions()
         	$('#sign_'+rel).addClass("primary");
         }
     });
+	$(`#exampaper .draggable-question`).each(function () {
+		let rel = $(this).attr('rel');
+		if ($(this).val().length > 0) {
+		  $('#sign_' + rel).addClass("primary");
+		} else {
+			$('#sign_' + rel).removeClass("primary");
+		}
+	  });
     setStorage();
 }
 

@@ -40,6 +40,14 @@ function markQuestions()
         	$('#sign_'+rel).addClass("btn-primary");
         }
     });
+	$(`#paper .draggable-question`).each(function () {
+		let rel = $(this).attr('rel');
+		if ($(this).val().length > 0) {
+		  $('#sign_' + rel).addClass("btn-primary");
+		} else {
+			$('#sign_' + rel).removeClass("btn-primary");
+		}
+	  });
     $('.yesdonumber').html($('#questionindex .qindex.btn-primary').length);
     setStorage();
 }

@@ -944,7 +944,22 @@ class exam_exam
             if (!empty($tmp)) {
                 if (!$questypes[$key]['questsort']) {
                     foreach ($tmp as $p) {
-                        if (is_array($sessionvars['examsessionuseranswer'][$p['questionid']])) {
+                        // 判断是否是拖放题, 如果是, 则进入拖放题判分区域
+                        if ($p['questiontype'] == '7') {
+                            $userAnswer = str_replace('&quot;', '"', $sessionvars['examsessionuseranswer'][$p['questionid']]);
+                            $userAnswer = json_decode($userAnswer, true);
+                            $answer = json_decode($p['questionanswer'], true);
+                            $answer = $answer['to'];
+                            $verified = [];
+                            $correct = null;
+                            foreach ($userAnswer as $item) {
+                                $id = $item['id'];
+                                $verified[$id] = ($item['value'] === $answer[$id]['value']);
+                                $correct = ($correct === null) ? $verified[$id] : ($correct && $verified[$id]);
+                            }
+                            $score = $correct ? $sessionvars['examsessionsetting']['examsetting']['questype'][$key]['score'] : 0;
+                        }
+                        elseif (is_array($sessionvars['examsessionuseranswer'][$p['questionid']])) {
                             $nanswer = '';
                             $answer = $sessionvars['examsessionuseranswer'][$p['questionid']];
                             asort($answer);
@@ -988,7 +1003,22 @@ class exam_exam
                 foreach ($tmp as $tmp2) {
                     foreach ($tmp2['data'] as $p) {
                         if (!$questypes[$p['questiontype']]['questsort']) {
-                            if (is_array($sessionvars['examsessionuseranswer'][$p['questionid']])) {
+                            // 判断是否是拖放题, 如果是, 则进入拖放题判分区域
+                            if ($p['questiontype'] == '7') {
+                                $userAnswer = str_replace('&quot;', '"', $sessionvars['examsessionuseranswer'][$p['questionid']]);
+                                $userAnswer = json_decode($userAnswer, true);
+                                $answer = json_decode($p['questionanswer'], true);
+                                $answer = $answer['to'];
+                                $verified = [];
+                                $correct = null;
+                                foreach ($userAnswer as $item) {
+                                    $id = $item['id'];
+                                    $verified[$id] = ($item['value'] === $answer[$id]['value']);
+                                    $correct = ($correct === null) ? $verified[$id] : ($correct && $verified[$id]);
+                                }
+                                $score = $correct ? $sessionvars['examsessionsetting']['examsetting']['questype'][$key]['score'] : 0;
+                            }
+                            elseif (is_array($sessionvars['examsessionuseranswer'][$p['questionid']])) {
                                 $answer = $sessionvars['examsessionuseranswer'][$p['questionid']];
                                 asort($answer);
                                 $nanswer = implode('', $answer);

@@ -92,6 +92,9 @@ class action extends app
                 $this->G->R($message);
             }
             foreach ($question as $key => $t) {
+                if($key == '7') {
+                    $question[$key] = str_replace('&quot;', '"', $question[$key]);
+                }
                 if ('' == $t) {
                     unset($question[$key]);
                 }

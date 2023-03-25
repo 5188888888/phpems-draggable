@@ -98,6 +98,77 @@
                                 </div>
                             </li>
                             {x2;endif}
+                            {x2;if:$questype[v:quest]['questchoice'] == 7}
+                            <li class="border morepadding">
+                                <div class="desc">
+                                    <div class="col-xs-1 nopadding">
+                                        <div class="toolbar"><span class="badge">正确答案</span></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="border morepadding">
+                                <div class="desc">
+                                    <!--生成拖放题区域-[START]-->
+                                    <script type="application/javascript">
+                                    currentId = '{x2;v:question[questionid]}';
+                                    global = new Global;
+                                    questionCache = localStorage.getItem('questions');
+                                    questionCache = ((questionCache !== null) && (questionCache.length > 0)) ? (JSON.parse(questionCache)[currentId]?.value || []) : [];
+                                    question = global.ajaxGetQuestion(currentId);
+                                    if  (Object.keys(question).length > 0) {
+                                        if(/\[\{(.*)\}\]/i.test(questionCache)) {
+                                            question.to = JSON.parse(questionCache);
+                                        }
+                                    }
+                                    question = question || { to: [] };
+
+                                    delete question.from;
+                                    // 更新数据
+                                    examObjList[currentId] = new DragObject;
+                                    examObjList[currentId].data = reactive(question);
+                                    eM = new EventManager(examObjList[currentId]);
+                                    questionManager = new QuestionManager(examObjList[currentId], currentId);
+                                    questionManager.silenceCheckAnswer(currentId);
+                                    createApp({
+                                      components: {
+                                        'draggable': window.vuedraggable,
+                                        'eM': eM,
+                                        'question': questionManager
+                                      },
+                                      data() {
+                                        return {
+                                          data: examObjList[currentId].data,
+                                          eM: eM,
+                                          question: questionManager,
+                                          currentId: currentId
+                                        }
+                                      },
+                                      methods: {
+                                      }
+                                    }).mount('#app' + currentId);
+                                    </script>
+                                    <div id="app{x2;v:question[questionid]}">
+                                      <div class="card">
+                                          <div class="card-body">
+                                              <div class="text-area">
+                                                  <ul>
+                                                      <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
+                                                          <template #item="{ element }">
+                                                              <li class="list">
+                                                                  <span>{{ element.description }}</span>
+                                                                  <div :id="currentId + '_' + element.id" class="gap">{{ element.value ?? '' }}</div>
+                                                              </li>
+                                                          </template>
+                                                      </draggable>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <!--生成拖放题区域-[END]-->
+                                </div>
+                            </li>
+                            {x2;else}
                             <li class="border morepadding">
                                 <div class="intro">
                                     <div class="desc">
@@ -134,6 +205,7 @@
                                     </div>
                                 </div>
                             </li>
+                            {x2;endif}
                             <li class="border morepadding">
                                 <div class="intro">
                                     <div class="desc">

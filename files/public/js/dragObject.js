@@ -87,7 +87,7 @@ class Global {
     );
     return data;
   }
-  
+
   ajaxSubmit(url, objData, callback) {
     let result;
     $.ajax({
@@ -104,6 +104,18 @@ class Global {
     return this.ajaxSubmit(global.questionQueryUrl + id, { data: 'null', type: 'onlyQuestion' }, (data) => {
       data = JSON.parse(data);
       return (data.message === 'success') ? data.question : {};
+    });
+  }
+
+  markQuestion(id) {
+    // 标记问题已作答
+    $(`#paper .draggable-question`).each(function () {
+      let rel = $(this).attr('rel');
+      if ($(this).val().length > 0) {
+        $('#sign_' + rel).addClass("btn-primary");
+      } else {
+        $('#sign_' + rel).removeClass("btn-primary");
+      }
     });
   }
 }
@@ -245,7 +257,7 @@ class EventManager {
     target.classList.remove('target');
 
     this.dragObject.reset();
-    if (examMode) {
+    if ((typeof examMode !== 'undefined') && examMode) {
       let input = document.getElementById(`draggableQuestion${id}`);
       let data = examObjList[id].data.to;
       input.value = JSON.stringify(data);
@@ -253,7 +265,8 @@ class EventManager {
       let q = localStorage.getItem('questions')
       q = JSON.parse(q)
       q[id] = { value: input.value, time: Math.floor((new Date).getTime() / 1000) };
-      localStorage.setItem('questions', JSON.stringify(q))
+      localStorage.setItem('questions', JSON.stringify(q));
+      this.global.markQuestion(id);
       // 发送数据缓存
       this.global.ajaxSubmit(`${this.global.basicQueryUrl}session&questionid=${this.questionId}`, { data: input.value }, (response) => {
         console.log(response)
@@ -269,8 +282,27 @@ class QuestionManager {
     this.global = new Global;
   }
 
-  checkAnswer() {
-    if (!this.dragObject.data.to.every(option => option.value !== undefined)) {
+  // 确认提交数据方法
+  async silenceCheckAnswer(id, callback) {
+    this.global.submit(this.global.questionQueryUrl + this.questionId, { data: this.dragObject.data.to, type: 'verify' },
+      (data) => {
+        if (data.status) {
+          for (let [k, v] of Object.entries(data.message)) {
+            if(typeof id !== 'undefined') {
+              k = `${id}_${k}`;
+            }
+            this.global.highlight(k, !v ? 'red' : 'green', 'white');
+          }
+        }
+
+        if(typeof callback == 'function') {
+          callback(data);
+        }
+      });
+  }
+
+  checkAnswer(id) {
+    if (!this.dragObject.data.to.every(option => ((option.value !== null) && (typeof option.value !== 'undefined')))) {
       this.global.show('未完成做题', '请检查题目是否还有未完成的选项!', 'error');
       return;
     }
@@ -287,45 +319,35 @@ class QuestionManager {
       cancelButtonText: '取消'
     };
 
-    // 确认提交数据方法
-    const confirmSubmit = async () => {
+    let callback = (data) => {
       let tmp = { title: '', icon: '' };
-      this.global.submit(this.global.questionQueryUrl + this.questionId, { data: this.dragObject.data.to, type: 'verify' },
-        (data) => {
-          if (data.status) {
-            for (const [k, v] of Object.entries(data.message)) {
-              this.global.highlight(k, !v ? 'red' : 'green', 'white');
-            }
-          }
-
-          switch (data.correct) {
-            case 'wrong':
-              tmp.title = '答案有误! 请仔细检查!';
-              tmp.icon = 'error';
-              break;
-            case 'success':
-              tmp.title = '恭喜, 回答正确!';
-              tmp.icon = 'success';
-              break;
-            default:
-              tmp.title = '[Dx0001] 未知错误! 请联系站点管理员检查该问题.';
-              tmp.icon = 'error';
-              break;
-          }
-          this.global.show(tmp.title, tmp?.text || '', tmp.icon);
-        });
+      switch (data.correct) {
+        case 'wrong':
+          tmp.title = '答案有误! 请仔细检查!';
+          tmp.icon = 'error';
+          break;
+        case 'success':
+          tmp.title = '恭喜, 回答正确!';
+          tmp.icon = 'success';
+          break;
+        default:
+          tmp.title = '[Dx0001] 未知错误! 请联系站点管理员检查该问题.';
+          tmp.icon = 'error';
+          break;
+      }
+      this.global.show(tmp.title, tmp?.text || '', tmp.icon);
     };
 
     if (!this.global.isMobile) {
       Swal.fire(confirmOptions).then(result => {
         if (result.isConfirmed) {
           const answers = this.dragObject.data.to.map(option => `<br/>${option.description}: ${option.value}`).join('');
-          Swal.fire('答案显示', '你的答案: ' + answers, 'success').then(() => { confirmSubmit() });
+          Swal.fire('答案显示', '你的答案: ' + answers, 'success').then(() => { this.silenceCheckAnswer(id, callback) });
         }
       });
     } else {
       if (confirm('确定要提交吗?', '提交做题后不可更改!')) {
-        confirmSubmit();
+        this.silenceCheckAnswer(id, callback);
       }
     }
   }
