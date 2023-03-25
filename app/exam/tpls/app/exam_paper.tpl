@@ -97,6 +97,81 @@
                                 <textarea class="jckeditor" etype="simple" id="editor{x2;v:question['questionid']}" name="question[{x2;v:question['questionid']}]" rel="{x2;v:question['questionid']}">{x2;realhtml:$sessionvars['examsessionuseranswer'][v:question['questionid']]}</textarea>
                             </li>
                             {x2;else}
+                            {x2;if:$questype[v:quest]['questchoice'] == 7}
+                            <li class="border morepadding">
+                                <div class="desc">
+                                    <!--生成拖放题区域-[START]-->
+                                    <script type="application/javascript">
+                                    examMode = true;
+                                    currentId = '{x2;v:question[questionid]}';
+                                    global = new Global;
+                                    questionCache = localStorage.getItem('questions');
+                                    questionCache = ((questionCache !== null) && (questionCache.length > 0)) ? (JSON.parse(questionCache)[currentId]?.value || []) : [];
+                                    question = global.ajaxGetQuestion(currentId);
+                                    if  (Object.keys(question).length > 0) {
+                                        if(/\[\{(.*)\}\]/i.test(questionCache)) {
+                                            question.to = JSON.parse(questionCache);
+                                            document.querySelector(`#draggableQuestion${currentId}`).value = questionCache;
+                                        }
+                                    }
+                                    question = question || { from: [], to: [] };
+                                    // 打乱顺序
+                                    question.from = global.getRandomArr(question.from, Object.keys(question.from).length);
+                                    // 更新数据
+                                    examObjList[currentId] = new DragObject;
+                                    examObjList[currentId].data = reactive(question);
+                                    eM = new EventManager(examObjList[currentId]);
+                                    questionManager = new QuestionManager(examObjList[currentId], currentId);
+                                    
+                                    
+                                    createApp({
+                                      components: {
+                                        'draggable': window.vuedraggable,
+                                        'eM': eM,
+                                        'question': question
+                                      },
+                                      data() {
+                                        return {
+                                          data: examObjList[currentId].data,
+                                          eM: eM,
+                                          question: questionManager
+                                        }
+                                      },
+                                      methods: {
+                                      }
+                                    }).mount('#app' + currentId);
+                                    global.markQuestion(currentId);
+                                    </script>
+                                    <div id="app{x2;v:question[questionid]}">
+                                      <div class="card">
+                                          <div class="card-body">
+                                              <div class="text-area">
+                                                  <ul>
+                                                      <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
+                                                          <template #item="{ element }">
+                                                              <li class="list">
+                                                                  <span>{{ element.description }}</span>
+                                                                  <div :id="element.id" class="gap">{{ element.value ?? '' }}</div>
+                                                              </li>
+                                                          </template>
+                                                      </draggable>
+                                                  </ul>
+                                              </div>
+                                              <draggable class="drag-area" :list="data.from" animation="300" item-key="id"
+                                                  :group="{ name: 'dataType{x2;v:question[questionid]}', pull: 'clone', put: false }" @start="eM.onStart($event)" @move="eM.onMove($event)" @end="eM.onEnd($event, {x2;v:question[questionid]})"
+                                                  :sort="false" ghost-class="ghost" chosen-class="chosenClass">
+                                                  <template #item="{ element }">
+                                                      <div class="item">{{ element.name }}</div>
+                                                  </template>
+                                              </draggable>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <input type="hidden" class="draggable-question" name="question[{x2;v:question['questionid']}]" id="draggableQuestion{x2;v:question['questionid']}" value="{x2;$sessionvars['examsessionuseranswer'][v:question['questionid']]}" rel="{x2;v:question['questionid']}" />
+                                    <!--生成拖放题区域-[END]-->
+                                </div>
+                            </li>
+                            {x2;else}
                             {x2;if:$questype[v:quest]['questchoice'] != 5}
                             <li class="border morepadding">
                                 <div class="desc">
@@ -126,6 +201,7 @@
                                 </div>
                             </li>
                             {x2;endif}
+                            {x2;endif}
                         </ul>
                     </div>
                     {x2;endtree}
@@ -154,6 +230,81 @@
                                     <p>{x2;realhtml:v:question['question']}</p>
                                 </div>
                             </li>
+                            {x2;if:$questype[v:quest]['questchoice'] == 7}
+                            <li class="border morepadding">
+                                <div class="desc">
+                                    <!--生成拖放题区域-[START]-->
+                                    <script type="application/javascript">
+                                    examMode = true;
+                                    currentId = '{x2;v:question[questionid]}';
+                                    global = new Global;
+                                    questionCache = localStorage.getItem('questions');
+                                    questionCache = ((questionCache !== null) && (questionCache.length > 0)) ? (JSON.parse(questionCache)[currentId]?.value || []) : [];
+                                    question = global.ajaxGetQuestion(currentId);
+                                    if  (Object.keys(question).length > 0) {
+                                        if(/\[\{(.*)\}\]/i.test(questionCache)) {
+                                            question.to = JSON.parse(questionCache);
+                                            document.querySelector(`#draggableQuestion${currentId}`).value = questionCache;
+                                        }
+                                    }
+                                    question = question || { from: [], to: [] };
+                                    // 打乱顺序
+                                    question.from = global.getRandomArr(question.from, Object.keys(question.from).length);
+                                    // 更新数据
+                                    examObjList[currentId] = new DragObject;
+                                    examObjList[currentId].data = reactive(question);
+                                    eM = new EventManager(examObjList[currentId]);
+                                    questionManager = new QuestionManager(examObjList[currentId], currentId);
+                                    
+                                    
+                                    createApp({
+                                      components: {
+                                        'draggable': window.vuedraggable,
+                                        'eM': eM,
+                                        'question': question
+                                      },
+                                      data() {
+                                        return {
+                                          data: examObjList[currentId].data,
+                                          eM: eM,
+                                          question: questionManager
+                                        }
+                                      },
+                                      methods: {
+                                      }
+                                    }).mount('#app' + currentId);
+                                    global.markQuestion(currentId);
+                                    </script>
+                                    <div id="app{x2;v:question[questionid]}">
+                                      <div class="card">
+                                          <div class="card-body">
+                                              <div class="text-area">
+                                                  <ul>
+                                                      <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
+                                                          <template #item="{ element }">
+                                                              <li class="list">
+                                                                  <span>{{ element.description }}</span>
+                                                                  <div :id="element.id" class="gap">{{ element.value ?? '' }}</div>
+                                                              </li>
+                                                          </template>
+                                                      </draggable>
+                                                  </ul>
+                                              </div>
+                                              <draggable class="drag-area" :list="data.from" animation="300" item-key="id"
+                                                  :group="{ name: 'dataType{x2;v:question[questionid]}', pull: 'clone', put: false }" @start="eM.onStart($event)" @move="eM.onMove($event)" @end="eM.onEnd($event, {x2;v:question[questionid]})"
+                                                  :sort="false" ghost-class="ghost" chosen-class="chosenClass">
+                                                  <template #item="{ element }">
+                                                      <div class="item">{{ element.name }}</div>
+                                                  </template>
+                                              </draggable>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <input type="hidden" class="draggable-question" name="question[{x2;v:question['questionid']}]" id="draggableQuestion{x2;v:question['questionid']}" value="{x2;$sessionvars['examsessionuseranswer'][v:question['questionid']]}" rel="{x2;v:question['questionid']}" />
+                                    <!--生成拖放题区域-[END]-->
+                                </div>
+                            </li>
+                            {x2;else}
                             {x2;if:$questype[v:question['questiontype']]['questsort']}
                             <li class="border morepadding">
                                 <textarea class="jckeditor" etype="simple" id="editor{x2;v:question['questionid']}" name="question[{x2;v:question['questionid']}]" rel="{x2;v:question['questionid']}">{x2;realhtml:$sessionvars['examsessionuseranswer'][v:question['questionid']]}</textarea>
@@ -187,6 +338,7 @@
                                     {x2;endif}
                                 </div>
                             </li>
+                            {x2;endif}
                             {x2;endif}
                         </ul>
                     </div>

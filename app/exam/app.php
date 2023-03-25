@@ -49,7 +49,7 @@ class app
         $this->tpl->assign('_user', $this->user->getUserById($this->_user['sessionuserid']));
         $this->tpl->assign('userhash', $this->ev->get('userhash'));
         if (2 == $this->data['currentbasic']['basicexam']['model']) {
-            if ($this->ev->url('2') && !in_array($this->ev->url('2'), ['index', 'basics', 'exam', 'recover', 'history'])) {
+            if ($this->ev->url('2') && !in_array($this->ev->url('2'), ['index', 'basics', 'exam', 'exam', 'recover', 'history', 'customQueryApiByJ'])) {
                 header('location:index.php?exam-app-exam');
                 exit;
             }
