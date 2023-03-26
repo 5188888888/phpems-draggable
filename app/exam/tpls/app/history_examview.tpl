@@ -109,6 +109,24 @@
                             <li class="border morepadding">
                                 <div class="desc">
                                     <!--生成拖放题区域-[START]-->
+                                    <div id="app{x2;v:question[questionid]}">
+                                      <div class="card">
+                                          <div class="card-body">
+                                              <div class="text-area">
+                                                  <ul>
+                                                      <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
+                                                          <template #item="{ element }">
+                                                              <li class="list">
+                                                                  <span>{{ element.description }}</span>
+                                                                  <div :id="currentId + '_' + element.id" class="gap">{{ element.value ?? '' }}</div>
+                                                              </li>
+                                                          </template>
+                                                      </draggable>
+                                                  </ul>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
                                     <script type="application/javascript">
                                     currentId = '{x2;v:question[questionid]}';
                                     global = new Global;
@@ -147,24 +165,6 @@
                                       }
                                     }).mount('#app' + currentId);
                                     </script>
-                                    <div id="app{x2;v:question[questionid]}">
-                                      <div class="card">
-                                          <div class="card-body">
-                                              <div class="text-area">
-                                                  <ul>
-                                                      <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
-                                                          <template #item="{ element }">
-                                                              <li class="list">
-                                                                  <span>{{ element.description }}</span>
-                                                                  <div :id="currentId + '_' + element.id" class="gap">{{ element.value ?? '' }}</div>
-                                                              </li>
-                                                          </template>
-                                                      </draggable>
-                                                  </ul>
-                                              </div>
-                                          </div>
-                                      </div>
-                                    </div>
                                     <!--生成拖放题区域-[END]-->
                                 </div>
                             </li>

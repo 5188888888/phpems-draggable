@@ -47,6 +47,34 @@
                                 <li class="border morepadding">
                                     <div class="desc">
                                         <!--生成拖放题区域-[START]-->
+                                        <div id="app{x2;v:question[questionid]}">
+                                          <div class="card">
+                                              <div class="card-body">
+                                                  <div class="text-area">
+                                                      <ul>
+                                                          <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
+                                                              <template #item="{ element }">
+                                                                  <li class="list">
+                                                                      <span>{{ element.description }}</span>
+                                                                      <div :id="currentId + '_' + element.id" class="gap">{{ element.value ?? '' }}</div>
+                                                                  </li>
+                                                              </template>
+                                                          </draggable>
+                                                      </ul>
+                                                  </div>
+                                                  <draggable class="drag-area" :list="data.from" animation="300" item-key="id"
+                                                      :group="{ name: 'dataType{x2;v:question[questionid]}', pull: 'clone', put: false }" @start="eM.onStart($event)" @move="eM.onMove($event)" @end="eM.onEnd($event, {x2;v:question[questionid]})"
+                                                      :sort="false" ghost-class="ghost" chosen-class="chosenClass">
+                                                      <template #item="{ element }">
+                                                          <div class="item">{{ element.name }}</div>
+                                                      </template>
+                                                  </draggable>
+                                                  <div class="submit-area">
+                                                      <button class="btn btn-primary badge" @click="question.checkAnswer(currentId)">答题完毕</button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                        </div>
                                         <script type="application/javascript">
                                         examMode = true;
                                         currentId = '{x2;v:question[questionid]}';
@@ -88,34 +116,6 @@
                                           }
                                         }).mount('#app' + currentId);
                                         </script>
-                                        <div id="app{x2;v:question[questionid]}">
-                                          <div class="card">
-                                              <div class="card-body">
-                                                  <div class="text-area">
-                                                      <ul>
-                                                          <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
-                                                              <template #item="{ element }">
-                                                                  <li class="list">
-                                                                      <span>{{ element.description }}</span>
-                                                                      <div :id="currentId + '_' + element.id" class="gap">{{ element.value ?? '' }}</div>
-                                                                  </li>
-                                                              </template>
-                                                          </draggable>
-                                                      </ul>
-                                                  </div>
-                                                  <draggable class="drag-area" :list="data.from" animation="300" item-key="id"
-                                                      :group="{ name: 'dataType{x2;v:question[questionid]}', pull: 'clone', put: false }" @start="eM.onStart($event)" @move="eM.onMove($event)" @end="eM.onEnd($event, {x2;v:question[questionid]})"
-                                                      :sort="false" ghost-class="ghost" chosen-class="chosenClass">
-                                                      <template #item="{ element }">
-                                                          <div class="item">{{ element.name }}</div>
-                                                      </template>
-                                                  </draggable>
-                                                  <div class="submit-area">
-                                                      <button class="btn btn-primary badge" @click="question.checkAnswer(currentId)">答题完毕</button>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                        </div>
                                         <input type="hidden" class="draggable-question" id="draggableQuestion{x2;v:question['questionid']}" value="{x2;$sessionvars['examsessionuseranswer'][v:question['questionid']]}" rel="{x2;v:question['questionid']}" />
                                         <!--生成拖放题区域-[END]-->
                                     </div>
@@ -273,7 +273,7 @@
                                           }
                                         }).mount('#app' + currentId);
                                         </script>
-                                        <div id="app{x2;v:question[questionid]}">
+                                        <div {x2;v:question[questionid]}">
                                           <div class="card">
                                               <div class="card-body">
                                                   <div class="text-area">
