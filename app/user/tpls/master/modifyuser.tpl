@@ -32,7 +32,7 @@
                             </li>
                             {x2;if:$modules[$groups[$user['usergroupid']]['groupmoduleid']]['modulecode'] == 'teacher'}
                             <li>
-                                <a href="#panel-788855" data-toggle="tab">管理科目</a>
+                                <a href="#panel-788855" data-toggle="tab">管理逻辑主线</a>
                             </li>
                             {x2;endif}
                             <a class="pull-right btn btn-primary" href="index.php?user-master-user">用户列表</a>
@@ -130,7 +130,7 @@
                                 <form action="index.php?user-master-user-modify" method="post" class="form-horizontal">
                                     <fieldset>
                                         <div class="form-group">
-                                            <label for="passowrd1" class="control-label col-sm-2">可管理科目：</label>
+                                            <label for="passowrd1" class="control-label col-sm-2">可管理逻辑主线：</label>
                                             <div class="col-sm-10">
                                                 {x2;eval: $user['teacher_subjects'] = unserialize($user['teacher_subjects'])}
                                                 {x2;tree:$subjects,subject,sid}

@@ -14,7 +14,7 @@
                     <div class="col-xs-12">
                         <ol class="breadcrumb">
                             <li><a href="index.php?{x2;$_app}-master">{x2;$apps[$_app]['appname']}</a></li>
-                            <li><a href="index.php?{x2;$_app}-master-basic-subject">科目管理</a></li>
+                            <li><a href="index.php?{x2;$_app}-master-basic-subject">逻辑主线管理</a></li>
                             <li class="active">章节管理</li>
                         </ol>
                     </div>

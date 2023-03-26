@@ -13,7 +13,7 @@
         <div class="bor_mid">
             <div id="notice">
                 <h2 class="page_title">
-                    <img src="app/exam/styles/image/xuanzekemu_tit.jpg" alt="选择考试科目" class="mr_10" />
+                    <img src="app/exam/styles/image/xuanzekemu_tit.jpg" alt="选择考试逻辑主线" class="mr_10" />
                     <span class=" font_12" style="color:#F18E1E;">机考模拟系统要求计算机浏览器为IE8、IE9、Chrome+、Safari4+或Firefox+版本！</span>
                 </h2>
                 <div id="xuanzekemu">

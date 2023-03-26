@@ -43,11 +43,11 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <label>科目：</label>
+                                        <label>逻辑主线：</label>
                                     </td>
                                     <td>
                                         <select name="search[basicsubjectid]" class="form-control">
-                                            <option value="0">选择科目</option>
+                                            <option value="0">选择逻辑主线</option>
                                             {x2;if:is_array($subjects)}
                                             {x2;tree:$subjects,subject,sid}
                                             <option value="{x2;v:subject['subjectid']}"{x2;if:v:subject['subjectid'] == $search['basicsubjectid']} selected{x2;endif}>{x2;v:subject['subject']}</option>

@@ -71,22 +71,22 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="contentcatid" class="control-label col-sm-2">科目：</label>
+                            <label for="contentcatid" class="control-label col-sm-2">逻辑主线：</label>
                             <div class="col-sm-9 form-inline">
-                                <select id="cscatid" msg="请选择科目" needle="needle" target="csbasicid" class="combox form-control" name="args[cssubjectid]" refUrl="index.php?course-master-index-getajaxbasiclist&subjectid={value}">
-                                    <option value="">请选择科目</option>
+                                <select id="cscatid" msg="请选择逻辑主线" needle="needle" target="csbasicid" class="combox form-control" name="args[cssubjectid]" refUrl="index.php?course-master-index-getajaxbasiclist&subjectid={value}">
+                                    <option value="">请选择逻辑主线</option>
                                     {x2;tree:$subjects,subject,sid}
                                     <option value="{x2;v:subject['subjectid']}">{x2;v:subject['subject']}</option>
                                     {x2;endtree}
                                 </select>
-                                <a href="index.php?exam-master-basic-subject" class="btn btn-primary" target="_blank">编辑科目</a>
+                                <a href="index.php?exam-master-basic-subject" class="btn btn-primary" target="_blank">编辑逻辑主线</a>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="contentcatid" class="control-label col-sm-2">对应考场：</label>
                             <div class="col-sm-9 form-inline">
                                 <select id="csbasicid" msg="您必须选择一个考场" needle="needle" class="form-control" name="args[csbasicid]">
-                                    <option value="">请选择科目后再选择考场</option>
+                                    <option value="">请选择逻辑主线后再选择考场</option>
                                 </select>
                             </div>
                         </div>

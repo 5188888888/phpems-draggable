@@ -32,7 +32,7 @@ class action extends app
             exit();
             break;
 
-            //根据科目获取章节
+            //根据逻辑主线获取章节
             case 'getsectionsbysubjectid':
             $esid = $this->ev->get('subjectid');
             $knowsid = intval($this->ev->get('knowsid'));

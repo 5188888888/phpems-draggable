@@ -87,7 +87,7 @@ class section_exam
         return $this->db->fetchAll($sql, 'knowsid');
     }
 
-    //获取多科目所有知识点
+    //获取多逻辑主线所有知识点
     public function getAllKnowsBySubjects($subjectids)
     {
         $data = [false, ['sections', 'knows'], [['AND', 'find_in_set(sections.sectionsubjectid,:subjectids)', 'subjectids', $subjectids], ['AND', 'sections.sectionid = knows.knowssectionid'], ['AND', 'knows.knowsstatus = 1']], false, 'knowssequence desc,knowsid asc', false];
@@ -185,7 +185,7 @@ class section_exam
         return $this->db->exec($sql);
     }
 
-    //根据知识点获取章节和科目信息
+    //根据知识点获取章节和逻辑主线信息
     public function getSubjectAndSectionByKnowsid($knowsid)
     {
         $data = [false, ['knows', 'sections'], [['AND', 'knows.knowsid = :knowsid', 'knowsid', $knowsid], ['AND', 'knows.knowssectionid = sections.sectionid']]];

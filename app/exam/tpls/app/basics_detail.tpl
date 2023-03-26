@@ -17,11 +17,6 @@
                                     </div>
                                     <div class="desc">
                                         <p>{x2;$basic['basicdescribe']}</p>
-                                        <p class="toolbar">
-                                            <a class="badge">当前积分：{x2;$_user['usercoin']}</a>
-                                            <a class="badge" href="index.php?user-center-payfor">在线充值</a>
-                                            <a class="badge" href="#myModal" role="button" data-toggle="modal">代金券充值</a>
-                                        </p>
                                         <div class="toolbar">
                                             {x2;if:$isopen}
                                             <a class="btn btn-info pull-right more ajax" href="index.php?exam-app-index-setCurrentBasic&basicid={x2;$basic['basicid']}">进入考场</a>

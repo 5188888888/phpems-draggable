@@ -79,10 +79,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="basicsubjectid" class="control-label col-sm-2">考试科目</label>
+                            <label for="basicsubjectid" class="control-label col-sm-2">考试逻辑主线</label>
                             <div class="col-sm-4">
-                                <select class="form-control" id="basicsubjectid" name="args[basicsubjectid]" needle="needle" msg="您必须选择考试科目">
-                                <option value="">选择科目</option>
+                                <select class="form-control" id="basicsubjectid" name="args[basicsubjectid]" needle="needle" msg="您必须选择考试逻辑主线">
+                                <option value="">选择逻辑主线</option>
                                   {x2;tree:$subjects,subject,sid}
                                   <option value="{x2;v:subject['subjectid']}"{x2;if:v:subject['subjectid'] == $basic['basicsubjectid']} selected{x2;endif}>{x2;v:subject['subject']}</option>
                                   {x2;endtree}

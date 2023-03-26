@@ -2,7 +2,7 @@
     <div id="main_left" {x2;if:$nouseleft}class="main_left0"{x2;else}class="main_left"{x2;endif}>
         <div id="lesson_nav_top"></div>
         <div id="lesson_nav_mid">
-            <!--科目导航-->
+            <!--逻辑主线导航-->
             <ul id="lesson_menu" class="menu">
               <li>
                 <div class="menu-hd"><span id="lesson-current"><a rel="reload" class="collapsible" href="#zl_{x2;$data['currentbasic']['basicid']}">{x2;substring:$data['currentbasic']['basic'],27}</a></span></div>
@@ -29,7 +29,7 @@
                 <li{x2;if:$method == 'favor'} class="on"{x2;endif}><a href="?exam-app-favor">我的收藏</a></li>
                 <li{x2;if:$method == 'history'} class="on"{x2;endif}><a href="?exam-app-history">答题记录</a></li>
              </ol>
-          <!--科目导航 结束-->
+          <!--逻辑主线导航 结束-->
         </div>
         <div id="lesson_nav_bottom"></div>
     </div>

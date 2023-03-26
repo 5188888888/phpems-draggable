@@ -20,7 +20,7 @@ class Subject extends Model
     protected $primaryKey = 'subjectid';
     public $timestamps = false;
 
-    // 获取科目考场
+    // 获取逻辑主线考场
     public function baiscs()
     {
         return $this->hasMany(Basic::class, 'basicsubjectid');

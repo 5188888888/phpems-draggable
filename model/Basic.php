@@ -26,7 +26,7 @@ class Basic extends Model
         return $this->belongsTo(Area::class, 'basicareaid');
     }
 
-    // 获取考试科目
+    // 获取考试逻辑主线
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'basicsubjectid');

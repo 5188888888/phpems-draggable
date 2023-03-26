@@ -15,7 +15,7 @@
                             {x2;endtree}
                             {x2;else}
                             <tr class="info">
-                                <td colspan="3">请先选择科目</td>
+                                <td colspan="3">请先选择逻辑主线</td>
                             </tr>
                             {x2;endif}
                         </table>

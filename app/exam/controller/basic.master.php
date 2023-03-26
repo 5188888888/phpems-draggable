@@ -614,7 +614,7 @@ class action extends app
             if ($section) {
                 $message = [
                     'statusCode' => 300,
-                    'message'    => '操作失败，该科目下已经存在同名的章节',
+                    'message'    => '操作失败，该逻辑主线下已经存在同名的章节',
                 ];
             } else {
                 $this->section->addSection($args);
@@ -646,7 +646,7 @@ class action extends app
             if ($tpsection) {
                 $message = [
                     'statusCode' => 300,
-                    'message'    => '操作失败，本科目下已经存在这个章节',
+                    'message'    => '操作失败，本逻辑主线下已经存在这个章节',
                     'forwardUrl' => "index.php?exam-master-basic-section&subjectid={$section['sectionsubjectid']}&page={$page}",
                 ];
             } else {
@@ -839,7 +839,7 @@ class action extends app
             if ($data) {
                 $message = [
                     'statusCode' => 300,
-                    'message'    => '操作失败，该科目已经存在',
+                    'message'    => '操作失败，该逻辑主线已经存在',
                 ];
                 $this->G->R($message);
             }
@@ -890,7 +890,7 @@ class action extends app
         if ($section) {
             $message = [
                 'statusCode' => 300,
-                'message'    => '操作失败，请删除该科目下所有章节后再删除本科目',
+                'message'    => '操作失败，请删除该逻辑主线下所有章节后再删除本逻辑主线',
             ];
         } else {
             $this->basic->delSubject($subjectid);

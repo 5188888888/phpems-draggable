@@ -106,7 +106,7 @@ class action extends app
             $this->G->R($message);
             break;
 
-            //根据科目获取章节信息
+            //根据逻辑主线获取章节信息
             case 'getsectionsbysubjectid':
             $sectionids = $this->data['currentbasic']['basicsection'];
             $aknows = $this->section->getSectionListByArgs([['AND', 'sectionid IN (:sectionsubjectid)', 'sectionsubjectid', $sectionids]]);

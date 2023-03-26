@@ -14,7 +14,7 @@ text-decoration:none;}
              <ul class="list-group">
                 <li class="list-group-item"><a href="?{x2;$_app}-master-basic">考场列表</a></li>
                 <li class="list-group-item"><a href="?{x2;$_app}-master-basic-area">地区设置</a></li>
-                <li class="list-group-item"><a href="?{x2;$_app}-master-basic-subject">科目管理</a></li>
+                <li class="list-group-item"><a href="?{x2;$_app}-master-basic-subject">逻辑主线管理</a></li>
                 <li class="list-group-item"><a href="?{x2;$_app}-master-basic-questype">题型管理</a></li>
             </ul>
         </div>
