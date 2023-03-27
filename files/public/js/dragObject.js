@@ -2,6 +2,7 @@
 const { createApp, reactive } = Vue
 const { vuedraggable } = Sortable
 
+// 定义考试题目对象列表
 const examObjList = {};
 
 /**
