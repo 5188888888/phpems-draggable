@@ -69,10 +69,6 @@
                 发现
             </div>
             <div class="col-4x menu">
-                <span class="iconfont icon-play-circle"></span><br />
-                课程
-            </div>
-            <div class="col-4x menu">
                 <span class="iconfont icon-read"></span><br />
                 考试
             </div>
@@ -83,51 +79,10 @@
         </div>
     </div>
     <div class="page-tabs">
-        <div class="page-content footer">
-            <div class="list-box bg">
-                <ol>
-                    <li class="unstyled">
-                        <h4 class="bigtitle">最新课程</h4>
-                    </li>
-                    {x2;tree:$courses['data'],content,cid}
-                    <li class="unstyled">
-                        <div class="col-4x">
-                            <div class="rows illus">
-                                <a href="index.php?course-phone-course&csid={x2;v:content['csid']}" class="ajax">
-                                    <img src="{x2;if:v:content['csthumb']}{x2;v:content['csthumb']}{x2;else}files/public/img/paper.jpg{x2;endif}">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-4l">
-                            <a href="index.php?course-phone-course&csid={x2;v:content['csid']}" class="ajax">
-                                <div class="rows info">
-                                    <h5 class="title">{x2;v:content['cstitle']}</h5>
-                                    <p class="intro">{x2;substring:v:content['csdescribe'],42}</p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    {x2;endtree}
-                    <li class="unstyled">
-                        <div class="rows">
-                            <a class="ajax" href="index.php?course-phone-index-lists">
-                                <div class="intro text-center">
-                                    更多课程 &gt;&gt;
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                </ol>
-            </div>
-        </div>
         <div class="page-footer">
             <div class="col-4x menu">
                 <span class="iconfont icon-compass"></span><br />
                 发现
-            </div>
-            <div class="col-4x menu active">
-                <span class="iconfont icon-play-circle"></span><br />
-                课程
             </div>
             <div class="col-4x menu">
                 <span class="iconfont icon-read"></span><br />
@@ -181,10 +136,6 @@
                 <span class="iconfont icon-compass"></span><br />
                 发现
             </div>
-            <div class="col-4x menu">
-                <span class="iconfont icon-play-circle"></span><br />
-                课程
-            </div>
             <div class="col-4x menu active">
                 <span class="iconfont icon-read"></span><br />
                 考试
@@ -229,14 +180,6 @@
             <div class="list-box bg top">
                 <ol>
                     <li class="unstyled">
-                        <a href="index.php?course-phone" class="ajax">
-                            <div class="rows info">
-                                我的课程
-                                <span class="pull-right"><em class="iconfont icon-right iconmenu"></em></span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="unstyled">
                         <a href="index.php?exam-phone" class="ajax">
                             <div class="rows info">
                                 我的考场
@@ -276,10 +219,6 @@
             <div class="col-4x menu">
                 <span class="iconfont icon-compass"></span><br />
                 发现
-            </div>
-            <div class="col-4x menu">
-                <span class="iconfont icon-play-circle"></span><br />
-                课程
             </div>
             <div class="col-4x menu">
                 <span class="iconfont icon-read"></span><br />

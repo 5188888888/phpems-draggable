@@ -62,23 +62,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?seminar" class="menu">
-                        专题
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?course" class="menu">
-                        课程
-                    </a>
-                </li>
-                <li>
                     <a href="index.php?exam" class="menu">
                         考试
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?docs" class="menu">
-                        文档
                     </a>
                 </li>
             </ul>
