@@ -60,9 +60,70 @@
                             <div class="media-body well">
                                 <ul class="unstyled">
                                     <li class="text-error">正确答案：</li>
+                                    {x2;if:$questype[v:quest]['questchoice'] == 7}<!--生成拖放题区域-[START]-->
+                                    <div id="app{x2;v:question[questionid]}">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="text-area">
+                                                <ul>
+                                                    <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
+                                                        <template #item="{ element }">
+                                                            <li class="list">
+                                                                <span>{{ element.description }}</span>
+                                                                <div :id="currentId + '_' + element.id" class="gap">{{ element.value ?? '' }}</div>
+                                                            </li>
+                                                        </template>
+                                                    </draggable>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <script type="application/javascript">
+                                    currentId = '{x2;v:question[questionid]}';
+                                    global = new Global;
+                                    questionCache = localStorage.getItem('questions');
+                                    questionCache = ((questionCache !== null) && (questionCache.length > 0)) ? (JSON.parse(questionCache)[currentId]?.value || []) : [];
+                                    question = global.ajaxGetQuestion(currentId);
+                                    if  (Object.keys(question).length > 0) {
+                                        if(/\[\{(.*)\}\]/i.test(questionCache)) {
+                                            question.to = JSON.parse(questionCache);
+                                        }
+                                    }
+                                    question = question || { to: [] };
+
+                                    delete question.from;
+                                    // 更新数据
+                                    examObjList[currentId] = new DragObject;
+                                    examObjList[currentId].data = reactive(question);
+                                    eM = new EventManager(examObjList[currentId]);
+                                    questionManager = new QuestionManager(examObjList[currentId], currentId);
+                                    questionManager.silenceCheckAnswer(currentId);
+                                    createApp({
+                                    components: {
+                                        'draggable': window.vuedraggable,
+                                        'eM': eM,
+                                        'question': questionManager
+                                    },
+                                    data() {
+                                        return {
+                                        data: examObjList[currentId].data,
+                                        eM: eM,
+                                        question: questionManager,
+                                        currentId: currentId
+                                        }
+                                    },
+                                    methods: {
+                                    }
+                                    }).mount('#app' + currentId);
+                                    </script>
+                                    <!--生成拖放题区域-[END]-->
+                                    {x2;else}
                                     <li class="text-success">{x2;realhtml:v:question['questionanswer']}</li>
                                     <li class="text-info">您的答案：</li>
                                     <li class="text-success">{x2;if:is_array($sessionvars['examsessionuseranswer'][v:question['questionid']])}{x2;eval: echo implode('',$sessionvars['examsessionuseranswer'][v:question['questionid']])}{x2;else}{x2;realhtml:$sessionvars['examsessionuseranswer'][v:question['questionid']]}{x2;endif}</li>
+                                    
+                                    {x2;endif}
                                     <li><span class="text-info">所在章：</span>{x2;tree:v:question['questionknowsid'],knowsid,kid}&nbsp;&nbsp;{x2;$globalsections[$globalknows[v:knowsid['knowsid']]['knowssectionid']]['section']}&nbsp;{x2;endtree}</li>
                                     <li class="text-success"><span class="text-info">知识点：</span>{x2;tree:v:question['questionknowsid'],knowsid,kid}&nbsp;&nbsp;{x2;$globalknows[v:knowsid['knowsid']]['knows']}&nbsp;{x2;endtree}</li>
                                     <li class="text-info">答案解析：</li>
@@ -109,9 +170,69 @@
                                 <div class="media-body well">
                                     <ul class="unstyled">
                                         <li class="text-error">正确答案：</li>
+                                        {x2;if:$questype[v:quest]['questchoice'] == 7}<!--生成拖放题区域-[START]-->
+                                        <div id="app{x2;v:question[questionid]}">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="text-area">
+                                                    <ul>
+                                                        <draggable :list="data.to" animation="300" item-key="id" group="dataType{x2;v:question[questionid]}" :sort="false" filter=".list">
+                                                            <template #item="{ element }">
+                                                                <li class="list">
+                                                                    <span>{{ element.description }}</span>
+                                                                    <div :id="currentId + '_' + element.id" class="gap">{{ element.value ?? '' }}</div>
+                                                                </li>
+                                                            </template>
+                                                        </draggable>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <script type="application/javascript">
+                                        currentId = '{x2;v:question[questionid]}';
+                                        global = new Global;
+                                        questionCache = localStorage.getItem('questions');
+                                        questionCache = ((questionCache !== null) && (questionCache.length > 0)) ? (JSON.parse(questionCache)[currentId]?.value || []) : [];
+                                        question = global.ajaxGetQuestion(currentId);
+                                        if  (Object.keys(question).length > 0) {
+                                            if(/\[\{(.*)\}\]/i.test(questionCache)) {
+                                                question.to = JSON.parse(questionCache);
+                                            }
+                                        }
+                                        question = question || { to: [] };
+    
+                                        delete question.from;
+                                        // 更新数据
+                                        examObjList[currentId] = new DragObject;
+                                        examObjList[currentId].data = reactive(question);
+                                        eM = new EventManager(examObjList[currentId]);
+                                        questionManager = new QuestionManager(examObjList[currentId], currentId);
+                                        questionManager.silenceCheckAnswer(currentId);
+                                        createApp({
+                                        components: {
+                                            'draggable': window.vuedraggable,
+                                            'eM': eM,
+                                            'question': questionManager
+                                        },
+                                        data() {
+                                            return {
+                                            data: examObjList[currentId].data,
+                                            eM: eM,
+                                            question: questionManager,
+                                            currentId: currentId
+                                            }
+                                        },
+                                        methods: {
+                                        }
+                                        }).mount('#app' + currentId);
+                                        </script>
+                                        <!--生成拖放题区域-[END]-->
+                                        {x2;else}
                                         <li class="text-success">{x2;realhtml:v:data['questionanswer']}</li>
                                         <li class="text-info">您的答案：</li>
                                         <li class="text-success">{x2;if:is_array($sessionvars['examsessionuseranswer'][v:data['questionid']])}{x2;eval: echo implode('',$sessionvars['examsessionuseranswer'][v:data['questionid']])}{x2;else}{x2;realhtml:$sessionvars['examsessionuseranswer'][v:data['questionid']]}{x2;endif}</li>
+                                        {x2;endif}
                                         <li><span class="text-info">所在章：</span>{x2;tree:v:questionrow['qrknowsid'],knowsid,kid}&nbsp;&nbsp;{x2;$globalsections[$globalknows[v:knowsid['knowsid']]['knowssectionid']]['section']}&nbsp;{x2;endtree}</li>
                                         <li><span class="text-info">知识点：</span>{x2;tree:v:questionrow['qrknowsid'],knowsid,kid}&nbsp;&nbsp;{x2;$globalknows[v:knowsid['knowsid']]['knows']}&nbsp;{x2;endtree}</li>
                                         <li class="text-info">答案解析：</li>
