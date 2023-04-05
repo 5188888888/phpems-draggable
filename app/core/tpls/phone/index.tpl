@@ -164,7 +164,6 @@
                             <div class="rows info">
                                 <h5 class="title">{x2;$_user['username']}</h5>
                                 <p class="intro">手机号：{x2;$_user['userphone']}</p>
-                                <p class="intro">积分：{x2;$_user['usercoin']}</p>
                             </div>
                         </div>
                     </li>

@@ -60,7 +60,6 @@
                                 <th>姓名</th>
                                 <th>开通时间</th>
                                 <th>注册IP</th>
-                                <th>积分点数</th>
                                 <th>用户组</th>
                                 <th>到期时间</th>
                                 <th>操作</th>
@@ -72,8 +71,9 @@
                                 <td>{x2;v:user['userid']}</td>
                                 <td>{x2;v:user['username']}</td>
                                 <td>{x2;v:user['usertruename']}</td>
-                                <td>{x2;date:v:user['obtime'],'Y-m-d'}</td><td>{x2;v:user['userregip']}</td>
-                                <td>{x2;v:user['usercoin']}</td><td>{x2;$groups[v:user['usergroupid']]['groupname']}</td>
+                                <td>{x2;date:v:user['obtime'],'Y-m-d'}</td>
+                                <td>{x2;v:user['userregip']}</td>
+                                <td>{x2;$groups[v:user['usergroupid']]['groupname']}</td>
                                 <td>{x2;date:v:user['obendtime'],'Y-m-d'}</td>
                                 <td>
                                       <div class="btn-group">

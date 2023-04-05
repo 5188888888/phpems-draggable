@@ -60,7 +60,8 @@
                             <div class="media-body well">
                                 <ul class="unstyled">
                                     <li class="text-error">正确答案：</li>
-                                    {x2;if:$questype[v:quest]['questchoice'] == 7}<!--生成拖放题区域-[START]-->
+                                    {x2;if:$questype[v:quest]['questchoice'] == 7}
+                                    <!--生成拖放题区域-[START]-->
                                     <div id="app{x2;v:question[questionid]}">
                                     <div class="card">
                                         <div class="card-body">

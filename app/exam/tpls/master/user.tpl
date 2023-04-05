@@ -56,7 +56,6 @@
                                 <th>用户名</th>
                                 <th>电子邮件</th>
                                 <th>注册IP</th>
-                                <th>积分点数</th>
                                 <th>用户组</th>
                                 <th>注册时间</th>
                                 <th>操作</th>
@@ -67,8 +66,9 @@
                             <tr>
                                 <td>{x2;v:user['userid']}</td>
                                 <td>{x2;v:user['username']}</td>
-                                <td>{x2;v:user['useremail']}</td><td>{x2;v:user['userregip']}</td>
-                                <td>{x2;v:user['usercoin']}</td><td>{x2;$groups[v:user['usergroupid']]['groupname']}</td>
+                                <td>{x2;v:user['useremail']}</td>
+                                <td>{x2;v:user['userregip']}</td>
+                                <td>{x2;$groups[v:user['usergroupid']]['groupname']}</td>
                                 <td>{x2;date:v:user['userregtime'],'Y-m-d H:i:s'}</td>
                                 <td>
                                       <div class="btn-group">

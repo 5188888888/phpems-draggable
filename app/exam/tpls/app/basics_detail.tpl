@@ -73,26 +73,5 @@
         </div>
     </div>
 </div>
-<form aria-hidden="true" id="myModal" method="post" class="modal fade" role="dialog" aria-labelledby="#myModalLabel" action="index.php?exam-app-basics-coupon">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
-                <h4 class="modal-title" id="myModalLabel">代金券充值</h4>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <div class="control-group">
-                    <div class="controls">
-                        <input placeholder="请输入16位代金券号码" type="text" class="form-control" name="couponsn" value="" needle="needle" msg="请输入16位代金券号码"/>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input name="coupon" type="hidden" value="1">
-                <button class="btn btn-primary" type="submit">充值</button>
-            </div>
-        </div>
-    </div>
-</form>
 </body>
 </html>

@@ -101,18 +101,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2">做为免费考场</label>
-                            <div class="col-sm-9">
-                                <label class="radio-inline">
-                                    <input name="args[basicdemo]" type="radio" value="1" {x2;if:$basic['basicdemo']}checked{x2;endif}/>是
-                                </label>
-                                <label class="radio-inline">
-                                    <input name="args[basicdemo]" type="radio" value="0" {x2;if:!$basic['basicdemo']}checked{x2;endif}/>否
-                                </label>
-                                <span class="help-block">免费考场用户开通考场时不扣除积分</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="basicprice" class="control-label col-sm-2">考场简介</label>
                             <div class="col-sm-9">
                                 <textarea class="form-control" rows="4" name="args[basicdescribe]" id="basicdescribe">{x2;$basic['basicdescribe']}</textarea>
@@ -122,6 +110,7 @@
                             <label for="basic" class="control-label col-sm-2"></label>
                             <div class="col-sm-9">
                                 <button class="btn btn-primary" type="submit">提交</button>
+                                <input type="hidden" name="args[basicdemo]" value="1"/>
                                 <input type="hidden" name="page" value="{x2;$page}"/>
                                 <input type="hidden" name="insertbasic" value="1"/>
                                 {x2;if:is_array($search)}{x2;tree:$search,arg,aid}
