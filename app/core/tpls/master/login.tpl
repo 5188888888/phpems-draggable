@@ -4,7 +4,7 @@
     <div class="row-fluid">
         <div class="main box" style="width: 1200px;">
             <div class="col-xs-7" style="padding:15px;">
-                <img src="files/public/img/login.jpg" />
+                <img src="files/public/img/login.jpg" width="100%" />
             </div>
             <div class="col-xs-4 pull-right" style="margin:30px 30px 0px auto;background-color:#FFFFFF;">
                 <form class="col-xs-12" method="post" action="index.php?core-master-login">
