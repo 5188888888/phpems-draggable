@@ -5,11 +5,6 @@
             <span class="glyphicon glyphicon-user"></span> 个人中心
         </a>
     </li>
-    <li class="border{x2;if:$method == 'progress'} active{x2;endif}">
-        <a href="index.php?user-center-progress">
-            <span class="glyphicon glyphicon-stats"></span> 学习进度
-        </a>
-    </li>
     <li  class="border{x2;if:$method == 'privatement'} active{x2;endif}">
         <a href="index.php?user-center-privatement">
             <span class="glyphicon glyphicon-cog"></span> 个人设置

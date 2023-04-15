@@ -117,6 +117,7 @@
                                           </div>
                                       </div>
                                     </div>
+                                    <input type="hidden" class="draggable-question" name="question[{x2;v:question['questionid']}]" id="draggableQuestion{x2;v:question['questionid']}" value="{x2;$sessionvars['examsessionuseranswer'][v:question['questionid']]}" rel="{x2;v:question['questionid']}" />
                                     <script type="application/javascript">
                                     examMode = true;
                                     currentId = '{x2;v:question[questionid]}';
@@ -158,7 +159,6 @@
                                     }).mount('#app' + currentId);
                                     global.markQuestion(currentId);
                                     </script>
-                                    <input type="hidden" class="draggable-question" name="question[{x2;v:question['questionid']}]" id="draggableQuestion{x2;v:question['questionid']}" value="{x2;$sessionvars['examsessionuseranswer'][v:question['questionid']]}" rel="{x2;v:question['questionid']}" />
                                     <!--生成拖放题区域-[END]-->
                                 </div>
                             </li>
@@ -251,6 +251,7 @@
                                           </div>
                                       </div>
                                     </div>
+                                    <input type="hidden" class="draggable-question" name="question[{x2;v:question['questionid']}]" id="draggableQuestion{x2;v:question['questionid']}" value="{x2;$sessionvars['examsessionuseranswer'][v:question['questionid']]}" rel="{x2;v:question['questionid']}" />
                                     <script type="application/javascript">
                                     examMode = true;
                                     currentId = '{x2;v:question[questionid]}';
@@ -292,7 +293,6 @@
                                     }).mount('#app' + currentId);
                                     global.markQuestion(currentId);
                                     </script>
-                                    <input type="hidden" class="draggable-question" name="question[{x2;v:question['questionid']}]" id="draggableQuestion{x2;v:question['questionid']}" value="{x2;$sessionvars['examsessionuseranswer'][v:question['questionid']]}" rel="{x2;v:question['questionid']}" />
                                     <!--生成拖放题区域-[END]-->
                                 </div>
                             </li>

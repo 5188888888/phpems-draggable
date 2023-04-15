@@ -17,7 +17,7 @@ class action extends app
 
     private function index()
     {
-        $page = $this->ev->get('page');
+        /* $page = $this->ev->get('page');
         $args = [['AND', 'prsuserid = :prsuserid', 'prsuserid', $this->_user['sessionuserid']]];
         $progresses = $this->progress->getUserProgressesListByArgs($args, $page);
         $courses = [];
@@ -34,6 +34,7 @@ class action extends app
         $this->tpl->assign('basics', $basics);
         $this->tpl->assign('courses', $courses);
         $this->tpl->assign('progresses', $progresses);
-        $this->tpl->display('progress');
+        $this->tpl->display('progress'); */
+        http_response_code(403);
     }
 }

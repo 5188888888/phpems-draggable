@@ -408,13 +408,15 @@ class QuestionManager {
       if (!value) return;
 
       if (type === 'target') {
+        let toLen = Object.keys(this.dragObject.data.to).length;
         this.dragObject.data.to.push({
-          id: Object.keys(this.dragObject.data.from).length,
+          id: toLen,
           description: value
         });
       } else {
+        let fromLen = Object.keys(this.dragObject.data.from).length;
         this.dragObject.data.from.push({
-          id: Object.keys(this.dragObject.data.to).length,
+          id: fromLen,
           name: value
         });
       }
@@ -434,7 +436,7 @@ class QuestionManager {
         showCancelButton: true,
         inputValidator: (value) => {
           if (!value) {
-            throw new Error('参数不能为空!');
+            return '参数不能为空!';
           }
         }
       });
